@@ -10,20 +10,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy to Render
-        uses: render-examples/deploy-to-render@v1
-        with:
-          service-id: ${{ secrets.RENDER_SERVICE_ID }}
-          api-key: ${{ secrets.RENDER_API_KEY }}
+      # --------------------
+      # Checkout code
+      # --------------------
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       # --------------------
-      # Build Frontend
+      # Set up Node.js
       # --------------------
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
+      # --------------------
+      # Build Frontend
+      # --------------------
       - name: Install frontend dependencies
         run: |
           cd frontend
@@ -35,9 +38,9 @@ jobs:
           npm run build
 
       # --------------------
-      # Deploy Frontend
+      # Deploy Frontend to Vercel
       # --------------------
-      - name: Deploy to Vercel
+      - name: Deploy frontend to Vercel
         uses: amondnet/vercel-action@v20
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
@@ -55,10 +58,8 @@ jobs:
           npm install
 
       # --------------------
-      # Deploy backend
+      # Deploy backend to Render via Deploy Hook
       # --------------------
       - name: Deploy backend to Render
-        uses: render-examples/render-deploy-action@v1
-        with:
-          api_key: ${{ secrets.RENDER_API_KEY }}
-          service_id: ${{ secrets.RENDER_SERVICE_ID }}
+        run: |
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
