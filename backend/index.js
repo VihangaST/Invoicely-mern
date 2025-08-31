@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 
 const dbConnection = require("./config/db");
 const app = express();
-const UserSchema = require("./models/UserModel");
 
 app.use(express.json());
 
@@ -14,13 +13,13 @@ app.use(cors());
 
 dbConnection();
 
-app.get("/", async (req, res) => {
-  await UserSchema.create({
-    name: "John Doe",
-  });
+const userRoutes = require("./routes/userRoute");
+app.use("/api/users", userRoutes);
 
-  res.send({ msg: "Hello from backend" });
-});
+const productRoutes = require("./routes/productRoute");
+app.use("/api/products", productRoutes);
+
+app.use("/uploads", express.static("uploads"));
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

@@ -1,10 +1,13 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import axios from "axios";
+import Products from "./pages/Products";
+import AddProducts from "./pages/AddProducts";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 
 function App() {
   axios
-    .get("http://localhost:3000/")
+    .post("http://localhost:3000/api/users", { name: "john" })
     .then((res) => {
       console.log(res.data);
     })
@@ -12,9 +15,12 @@ function App() {
       console.log(err.message);
     });
   return (
-    <>
-      <h1>Hello from frontend</h1>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/products" element={<Products />} />
+        <Route path="/add-product" element={<AddProducts />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
