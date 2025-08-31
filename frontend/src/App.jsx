@@ -4,6 +4,7 @@ import axios from "axios";
 import Products from "./pages/Products";
 import AddProducts from "./pages/AddProducts";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
+import Customers from "./pages/Customers";
 
 function App() {
   axios
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/products" element={<Products />} />
         <Route path="/add-product" element={<AddProducts />} />
+        <Route path="/customers" element={<Customers />} />
       </Routes>
     </BrowserRouter>
   );

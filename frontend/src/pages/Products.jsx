@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
+
 function Products() {
+  const [search, setSearch] = useState("");
   const [products, setProducts] = useState([]);
+
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(search.toLowerCase())
+  );
 
   const getProducts = async () => {
     try {
@@ -21,9 +27,16 @@ function Products() {
 
   return (
     <>
+      <input
+        type="text"
+        placeholder="Search products..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className="form-control mb-3"
+      />
       <div className="container">
         <div className="row gap-3">
-          {products.map((product) => {
+          {filteredProducts.map((product) => {
             return <ProductCard key={product._id} product={product} />;
           })}
         </div>
