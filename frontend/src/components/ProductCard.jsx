@@ -4,10 +4,7 @@ function ProductCard({ product }) {
   return (
     <>
       <div className="card" style={{ width: "14rem" }}>
-        <img
-          src={`http://localhost:3000/api/products/get-products${product.image}`}
-          alt={product.name}
-        />
+        <img src={`http://localhost:3000${product.image}`} alt={product.name} />
         <div className="card-body">
           <h5 className="card-title">{product.name}</h5>
           <p className="card-text">{product.weight}</p>
