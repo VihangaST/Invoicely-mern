@@ -7,14 +7,16 @@ function ProductCard({ product }) {
         <img src={`http://localhost:3000${product.image}`} alt={product.name} />
         <div className="card-body">
           <h5 className="card-title">{product.name}</h5>
-          <p className="card-text">{product.weight}</p>
-          <p className="card-text">{product.costPrice}</p>
-          <p className="card-text">{product.sellingPrice}</p>
-          <p className="card-text">{product.markerPrice}</p>
-
-          <a href="#" className="btn btn-primary">
+          Weight: {product.weight}
+          <br />
+          Cost Price: Rs. {product.costPrice}
+          <br />
+          Selling Price: Rs. {product.sellingPrice}
+          <br />
+          Market Price: Rs. {product.markerPrice}
+          {/* <a href="#" className="btn btn-primary">
             Go somewhere
-          </a>
+          </a> */}
         </div>
       </div>
     </>
