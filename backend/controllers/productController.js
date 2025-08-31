@@ -5,7 +5,7 @@ const addProduct = async (req, res) => {
   try {
     const { brand, name, weight, costPrice, sellingPrice, markerPrice } =
       req.body;
-    const imagePath = req.file ? req.file.path : "";
+    const imagePath = req.file ? `/uploads/${req.file.filename}` : "";
     const product = new ProductSchema({
       brand,
       name,
@@ -19,23 +19,19 @@ const addProduct = async (req, res) => {
     res.send({ msg: "successfully added" });
   } catch (err) {
     console.log(err);
+    res.status(500).send({ msg: "Error adding product", error: err.message });
   }
 };
 
 const getProducts = async (req, res) => {
   try {
     const Products = await ProductSchema.find();
-    Products.forEach((product) => {
-      if (product.image) {
-        product.image = product.image.toString("base64");
-      }
-    });
-    console.log(Products);
-
     res.send({ msg: "success", products: Products });
   } catch (err) {
     console.log(err);
+    res
+      .status(500)
+      .send({ msg: "Error fetching products", error: err.message });
   }
 };
-
 module.exports = { addProduct, getProducts };

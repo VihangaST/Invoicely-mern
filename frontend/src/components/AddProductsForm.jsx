@@ -11,11 +11,26 @@ function AddProductsForm() {
     image: "",
   });
 
+  // ...existing code...
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    if (name === "image") {
+      setProduct({ ...product, image: files[0] });
+    } else {
+      setProduct({ ...product, [name]: value });
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Product submitted:", product);
+    const formData = new FormData();
+    Object.entries(product).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
     axios
-      .post("http://localhost:3000/api/products/add", product)
+      .post("http://localhost:3000/api/products/add", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
       .then((res) => {
         console.log(res.data);
       })
@@ -24,12 +39,6 @@ function AddProductsForm() {
       });
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setProduct({ ...product, [name]: value });
-    console.log(name, value);
-  };
   return (
     <>
       <form className="container mt-5" onSubmit={handleSubmit}>
