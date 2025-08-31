@@ -3,7 +3,7 @@ import React from "react";
 function ProductCard({ product }) {
   return (
     <>
-      <div className="card" style={{ width: "14rem" }}>
+      <div className="card" style={{ width: "13rem" }}>
         <img src={`http://localhost:3000${product.image}`} alt={product.name} />
         <div className="card-body">
           <h5 className="card-title">{product.name}</h5>

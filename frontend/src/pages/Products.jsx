@@ -21,9 +21,13 @@ function Products() {
 
   return (
     <>
-      {products.map((product) => {
-        return <ProductCard key={product._id} product={product} />;
-      })}
+      <div className="container">
+        <div className="row gap-3">
+          {products.map((product) => {
+            return <ProductCard key={product._id} product={product} />;
+          })}
+        </div>
+      </div>
     </>
   );
 }
