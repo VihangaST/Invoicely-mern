@@ -19,6 +19,9 @@ app.use("/api/users", userRoutes);
 const productRoutes = require("./routes/productRoute");
 app.use("/api/products", productRoutes);
 
+const customerRoutes = require("./routes/customerRoute");
+app.use("/api/customers", customerRoutes);
+
 app.use("/uploads", express.static("uploads"));
 
 app.listen(PORT, () => {
