@@ -11,4 +11,13 @@ const addCustomers = async (req, res) => {
   }
 };
 
-module.exports = { addCustomers };
+const getCustomers = async (req, res) => {
+  try {
+    const customers = await CustomerSchema.find({});
+    console.log(customers);
+    res.send(customers);
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+module.exports = { addCustomers, getCustomers };
