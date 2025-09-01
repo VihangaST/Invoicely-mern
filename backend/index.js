@@ -22,6 +22,9 @@ app.use("/api/products", productRoutes);
 const customerRoutes = require("./routes/customerRoute");
 app.use("/api/customers", customerRoutes);
 
+const billingRoutes = require("./routes/billingRoutes");
+app.use("/api/billing", billingRoutes);
+
 app.use("/uploads", express.static("uploads"));
 
 app.listen(PORT, () => {
